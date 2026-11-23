@@ -18,7 +18,7 @@
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jackson.version>2.18.2</jackson.version>
+        <jackson.version>2.23.0</jackson.version>
         <jakarta.annotation.version>3.0.0</jakarta.annotation.version>
         <jakarta.validation.version>3.1.0</jakarta.validation.version>
         <openapi-generator-plugin.version>7.10.0</openapi-generator-plugin.version>

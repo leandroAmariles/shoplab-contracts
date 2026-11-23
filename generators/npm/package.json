@@ -1,0 +1,38 @@
+{
+  "name": "@leandroamariles/shoplab-contracts",
+  "version": "1.0.0",
+  "description": "Angular and TypeScript typed clients and models generated from ShopLab OpenAPI contracts.",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "generate": "openapi-generator-cli generate -i ../../openapi/common/v1/common-api.yaml -g typescript-angular -o src/ --additional-properties=ngVersion=18.0.0,npmName=@leandroamariles/shoplab-contracts,supportsES6=true",
+    "build": "tsc -p tsconfig.json",
+    "prepublishOnly": "npm run build"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leandroAmariles/shoplab-contracts.git"
+  },
+  "keywords": [
+    "shoplab",
+    "contracts",
+    "openapi",
+    "angular",
+    "typescript"
+  ],
+  "author": "Leandro Amariles",
+  "license": "MIT",
+  "devDependencies": {
+    "@openapitools/openapi-generator-cli": "^2.16.2",
+    "typescript": "^5.6.3"
+  },
+  "peerDependencies": {
+    "@angular/common": ">=18.0.0",
+    "@angular/core": ">=18.0.0",
+    "rxjs": "^7.8.0"
+  }
+}

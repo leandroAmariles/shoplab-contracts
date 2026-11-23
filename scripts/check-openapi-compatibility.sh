@@ -18,7 +18,14 @@ fi
 # Ensure oasdiff is available
 if ! command -v oasdiff &> /dev/null; then
   echo "Installing oasdiff..."
-  go install github.com/tufin/oasdiff@latest 2>/dev/null || curl -fsSL https://raw.githubusercontent.com/tufin/oasdiff/main/install.sh | sh
+  OASDIFF_VERSION="1.11.7"
+  curl -fsSL "https://github.com/oasdiff/oasdiff/releases/download/v${OASDIFF_VERSION}/oasdiff_${OASDIFF_VERSION}_linux_amd64.tar.gz" | tar -xz -C /usr/local/bin oasdiff 2>/dev/null || \
+  curl -fsSL "https://github.com/oasdiff/oasdiff/releases/download/v${OASDIFF_VERSION}/oasdiff_${OASDIFF_VERSION}_linux_amd64.tar.gz" | tar -xz oasdiff && chmod +x oasdiff && mv oasdiff /usr/local/bin/ || true
+fi
+
+if ! command -v oasdiff &> /dev/null; then
+  echo "Fallback: installing oasdiff with go..."
+  go install github.com/oasdiff/oasdiff@latest || true
 fi
 
 TOTAL_BREAKING=0

@@ -69,7 +69,7 @@ jobs:
       - name: Set up uv
         uses: astral-sh/setup-uv@v3
         with:
-          enable-cache: true
+          enable-cache: false
       - name: Java DTOs Compilation Dry-Run
         run: cd generators/java && mvn clean compile -B
       - name: Angular Client Build Dry-Run

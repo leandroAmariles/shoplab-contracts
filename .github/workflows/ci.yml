@@ -73,6 +73,6 @@ jobs:
       - name: Java DTOs Compilation Dry-Run
         run: cd generators/java && mvn clean compile -B
       - name: Angular Client Build Dry-Run
-        run: cd generators/npm && npm ci && npm run build
+        run: cd generators/npm && npm install && npm run build
       - name: Python Package Build Dry-Run
         run: cd generators/python && uv build

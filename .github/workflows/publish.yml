@@ -52,7 +52,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           cd generators/npm
-          npm ci
+          npm install
           npm run build
           npm publish
 

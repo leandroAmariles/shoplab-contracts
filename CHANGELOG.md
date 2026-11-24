@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/leandroAmariles/shoplab-contracts/compare/v1.1.0...v1.2.0) (2026-11-24)
+
+
+### Features
+
+* **openapi:** [LAB-106] add chat, retrieval, and eval OpenAPI contracts and Angular client ([#12](https://github.com/leandroAmariles/shoplab-contracts/issues/12)) ([49ab9b6](https://github.com/leandroAmariles/shoplab-contracts/commit/49ab9b6dbf5e835c208b2e9993a5949610468144))
+
 ## [1.1.0](https://github.com/leandroAmariles/shoplab-contracts/compare/v1.0.0...v1.1.0) (2026-11-23)
 
 

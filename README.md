@@ -21,9 +21,19 @@ shoplab-contracts/
 │   │   └── publish.yml            # Publicación Maven, npm y confirmación tag Python
 │   └── dependabot.yml             # Mantenimiento de GitHub Actions y generadores
 ├── openapi/
-│   └── common/
+│   ├── README.md                  # Índice de contratos y regla al nacer (catalog, orders, tickets)
+│   ├── common/
+│   │   └── v1/
+│   │       └── common-api.yaml    # Contrato semilla base (Health, Ping, ErrorDto, ApiErrorResponse)
+│   ├── chat/
+│   │   └── v1/
+│   │       └── chat-api.yaml      # API de chat SSE, feedback y GET /api/assistant/settings
+│   ├── retrieval/
+│   │   └── v1/
+│   │       └── retrieval-api.yaml # API de documentos y búsqueda semántica
+│   └── eval/
 │       └── v1/
-│           └── common-api.yaml    # Contrato semilla base (Health, Ping, ErrorDto)
+│           └── eval-api.yaml      # API de corridas de evaluación, settings e historial
 ├── avro/
 │   └── .gitkeep                   # Vacío de esquemas reales hasta LAB-50
 ├── asyncapi/

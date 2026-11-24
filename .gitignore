@@ -12,10 +12,15 @@ generators/java/build/
 # Node / npm (Generators)
 generators/npm/node_modules/
 generators/npm/dist/
+generators/npm/src/
+generators/npm/openapitools.json
 generators/npm/.angular/
+generators/npm/*.tgz
 package-lock.json
 
 # Python (Generators)
+__pycache__/
+*.pyc
 generators/python/__pycache__/
 generators/python/*.pyc
 generators/python/.venv/

@@ -119,3 +119,24 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ErrorDto'
+
+    ApiErrorResponse:
+      type: object
+      description: Standard error payload emitted by ShopLab services via GlobalExceptionHandler.
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+          description: Unique typed error code following <SERVICE>_<MODULE>_<NNNNN> pattern.
+          example: 'SLHD_RETR_00009'
+        message:
+          type: string
+          description: Standard human-readable error message in English.
+          example: 'The search query must not be blank'
+        detail:
+          type:
+            - string
+            - 'null'
+          description: Optional safe diagnostic detail when provided by PublicDetail.

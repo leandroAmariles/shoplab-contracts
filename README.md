@@ -73,7 +73,7 @@ shoplab-contracts/
 ## Cliente HTTP Java de la búsqueda
 
 El JAR incluye la interfaz `com.shoplab.contracts.retrieval.client.KnowledgeSearchApi` (`@HttpExchange`, reactiva),
-generada del OpenAPI de `retrieval` (LAB-129). No trae cliente HTTP ni Jackson propios: el consumidor pone
+generada del OpenAPI de `retrieval` (LAB-129), disponible desde la versión 1.3.0. No trae cliente HTTP ni Jackson propios: el consumidor pone
 `spring-web` y la monta sobre su `WebClient`:
 
 ```java

@@ -21,7 +21,7 @@
         <jakarta.validation.version>3.1.0</jakarta.validation.version>
         <spring.version>7.0.0</spring.version>
         <reactor.version>3.8.0</reactor.version>
-        <openapi-generator-plugin.version>7.10.0</openapi-generator-plugin.version>
+        <openapi-generator-plugin.version>7.27.0</openapi-generator-plugin.version>
     </properties>
 
     <distributionManagement>

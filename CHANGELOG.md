@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/leandroAmariles/shoplab-contracts/compare/v1.2.0...v1.3.0) (2026-11-25)
+
+
+### Features
+
+* **java:** [LAB-129] publicar la interfaz HTTP de la búsqueda ([0db87cb](https://github.com/leandroAmariles/shoplab-contracts/commit/0db87cb8659a6a786c336c13c193b6f20095e8a2))
+
 ## [1.2.0](https://github.com/leandroAmariles/shoplab-contracts/compare/v1.1.0...v1.2.0) (2026-11-24)
 
 

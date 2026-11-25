@@ -70,6 +70,19 @@ shoplab-contracts/
 
 ---
 
+## Cliente HTTP Java de la búsqueda
+
+El JAR incluye la interfaz `com.shoplab.contracts.retrieval.client.KnowledgeSearchApi` (`@HttpExchange`, reactiva),
+generada del OpenAPI de `retrieval` (LAB-129). No trae cliente HTTP ni Jackson propios: el consumidor pone
+`spring-web` y la monta sobre su `WebClient`:
+
+```java
+var factory = HttpServiceProxyFactory.builderFor(WebClientAdapter.create(webClient)).build();
+KnowledgeSearchApi search = factory.createClient(KnowledgeSearchApi.class);
+```
+
+---
+
 ## Documentación y Guía Operativa
 
 Para consultar el flujo de publicación detallado y la política de orden de despliegue entre productor y consumidores (estrategia expand-and-contract), consulta la documentación oficial en:

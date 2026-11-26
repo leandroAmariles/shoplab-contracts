@@ -13,6 +13,7 @@ const specs = [
   { name: 'chat', namespace: 'chat', input: join(repoRoot, 'openapi/chat/v1/chat-api.yaml') },
   { name: 'retrieval', namespace: 'retrieval', input: join(repoRoot, 'openapi/retrieval/v1/retrieval-api.yaml') },
   { name: 'eval', namespace: 'evalApi', input: join(repoRoot, 'openapi/eval/v1/eval-api.yaml') },
+  { name: 'catalog', namespace: 'catalog', input: join(repoRoot, 'openapi/catalog/v1/catalog-api.yaml') },
 ];
 
 rmSync(srcDir, { recursive: true, force: true });
@@ -57,6 +58,7 @@ export * as common from './common/index';
 export * as chat from './chat/index';
 export * as retrieval from './retrieval/index';
 export * as evalApi from './eval/index';
+export * as catalog from './catalog/index';
 
 export type { ApiErrorResponse } from './common/model/apiErrorResponse';
 export type { HealthStatus } from './common/model/healthStatus';

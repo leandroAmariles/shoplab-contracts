@@ -10,6 +10,7 @@ Este directorio contiene las especificaciones OpenAPI 3.1.0 autoritativas de las
 | `chat` | `openapi/chat/v1/chat-api.yaml` | Activo |
 | `retrieval` | `openapi/retrieval/v1/retrieval-api.yaml` | Activo |
 | `eval` | `openapi/eval/v1/eval-api.yaml` | Activo |
+| `catalog` | `openapi/catalog/v1/catalog-api.yaml` | Activo (LAB-113) |
 
 ## Regla de nacimiento para servicios futuros (`catalog`, `orders`, `tickets`)
 

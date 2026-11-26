@@ -1,0 +1,328 @@
+openapi: 3.1.0
+info:
+  title: ShopLab Catalog API
+  description: >
+    HTTP contract for catalog management, product search, pagination, and real-time inventory
+    and reference price queries consumed by retrieval-service and AI agents.
+  version: 1.0.0
+  contact:
+    name: ShopLab Core Team
+    url: https://github.com/leandroAmariles/shoplab-contracts
+
+servers:
+  - url: /
+    description: Gateway or service base URL
+
+tags:
+  - name: Products
+    description: Catalog products query, search and pagination
+  - name: Categories
+    description: Catalog taxonomy categories
+  - name: Stock
+    description: Real-time product inventory and pricing
+
+paths:
+  /api/catalog/products:
+    get:
+      tags: [Products]
+      summary: Search and paginate catalog products
+      description: Returns a paginated list of products ordered deterministically by product_id, optionally filtered by text, category, or stock availability.
+      operationId: getProducts
+      parameters:
+        - name: page
+          in: query
+          description: Page index (0-based)
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+        - name: size
+          in: query
+          description: Number of records per page
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 200
+            default: 50
+        - name: category
+          in: query
+          description: Filter by category name
+          required: false
+          schema:
+            type: string
+        - name: query
+          in: query
+          description: >
+            Words that must appear in the product id or in the category (Portuguese or English).
+            The dataset has no product titles.
+          required: false
+          schema:
+            type: string
+        - name: inStock
+          in: query
+          description: Filter only products with inventory > 0
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Paginated products response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductPageResponse'
+        '422':
+          description: Invalid query or pagination parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '503':
+          description: Storage or database unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+
+  /api/catalog/products/{id}:
+    get:
+      tags: [Products]
+      summary: Get detailed product specification and inventory
+      description: Returns the full technical specifications, reference price, dimensions, and current stock for a product ID.
+      operationId: getProductById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Product alphanumeric ID
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Product detail response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductDetailResponse'
+        '404':
+          description: Product not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '503':
+          description: Storage unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+
+  /api/catalog/products/{id}/stock:
+    get:
+      tags: [Stock]
+      summary: Lightweight product stock and price query
+      description: Returns real-time stock units and reference price for quick availability verification.
+      operationId: getProductStock
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Product ID
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Product stock response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductStockResponse'
+        '404':
+          description: Product not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '503':
+          description: Storage unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+
+  /api/catalog/categories:
+    get:
+      tags: [Categories]
+      summary: List all catalog categories
+      description: Returns the full list of product categories with their original Portuguese and official English names.
+      operationId: getCategories
+      responses:
+        '200':
+          description: List of categories
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CategoryResponse'
+        '503':
+          description: Storage unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+
+components:
+  schemas:
+    ProductSummaryResponse:
+      type: object
+      required: [productId, stock]
+      properties:
+        productId:
+          type: string
+          example: 1e9e8ef04dbcff4541ed26657ea517e5
+        categoryName:
+          type: [string, 'null']
+          example: perfumaria
+        categoryNameEn:
+          type: [string, 'null']
+          example: perfumery
+        referencePrice:
+          type: [number, 'null']
+          format: double
+          example: 59.90
+        stock:
+          type: integer
+          minimum: 0
+          example: 42
+        weightG:
+          type: [integer, 'null']
+          example: 225
+        dimensions:
+          $ref: '#/components/schemas/ProductDimensions'
+
+    ProductDimensions:
+      type: object
+      properties:
+        lengthCm:
+          type: [integer, 'null']
+          example: 16
+        heightCm:
+          type: [integer, 'null']
+          example: 10
+        widthCm:
+          type: [integer, 'null']
+          example: 14
+
+    ProductPageResponse:
+      type: object
+      required: [content, page, size, totalElements, totalPages, last]
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductSummaryResponse'
+        page:
+          type: integer
+          minimum: 0
+          example: 0
+        size:
+          type: integer
+          minimum: 1
+          example: 50
+        totalElements:
+          type: integer
+          minimum: 0
+          example: 32951
+        totalPages:
+          type: integer
+          minimum: 0
+          example: 660
+        last:
+          type: boolean
+          example: false
+
+    ProductDetailResponse:
+      type: object
+      required: [productId, stock, available]
+      properties:
+        productId:
+          type: string
+          example: 1e9e8ef04dbcff4541ed26657ea517e5
+        categoryName:
+          type: [string, 'null']
+          example: perfumaria
+        categoryNameEn:
+          type: [string, 'null']
+          example: perfumery
+        nameLength:
+          type: [integer, 'null']
+          example: 40
+        descriptionLength:
+          type: [integer, 'null']
+          example: 287
+        photosCount:
+          type: [integer, 'null']
+          example: 1
+        weightG:
+          type: [integer, 'null']
+          example: 225
+        dimensions:
+          $ref: '#/components/schemas/ProductDimensions'
+        referencePrice:
+          type: [number, 'null']
+          format: double
+          example: 59.90
+        stock:
+          type: integer
+          minimum: 0
+          example: 42
+        available:
+          type: boolean
+          example: true
+
+    ProductStockResponse:
+      type: object
+      required: [productId, stock, available]
+      properties:
+        productId:
+          type: string
+          example: 1e9e8ef04dbcff4541ed26657ea517e5
+        referencePrice:
+          type: [number, 'null']
+          format: double
+          example: 59.90
+        stock:
+          type: integer
+          minimum: 0
+          example: 42
+        available:
+          type: boolean
+          example: true
+        updatedAt:
+          type: string
+          format: date-time
+
+    CategoryResponse:
+      type: object
+      required: [name]
+      properties:
+        name:
+          type: string
+          example: perfumaria
+        nameEn:
+          type: [string, 'null']
+          example: perfumery
+
+    ApiErrorResponse:
+      type: object
+      required: [code, description]
+      properties:
+        code:
+          type: string
+          example: SLHD_CATALOG_00001
+        description:
+          type: string
+          example: Producto no encontrado en catalogo

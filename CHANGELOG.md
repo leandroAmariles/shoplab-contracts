@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/leandroAmariles/shoplab-contracts/compare/v1.3.0...v1.4.0) (2026-11-26)
+
+
+### Features
+
+* **java:** generate AssistantSettingsApi HTTP interface for LAB-59 ([#17](https://github.com/leandroAmariles/shoplab-contracts/issues/17)) ([600257c](https://github.com/leandroAmariles/shoplab-contracts/commit/600257cc6c5245e2c2e4c64e64dfaa3dd9e804a5))
+
 ## [1.3.0](https://github.com/leandroAmariles/shoplab-contracts/compare/v1.2.0...v1.3.0) (2026-11-25)
 
 

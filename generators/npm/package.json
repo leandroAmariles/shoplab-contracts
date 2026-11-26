@@ -1,6 +1,6 @@
 {
   "name": "@leandroamariles/shoplab-contracts",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Angular and TypeScript typed clients and models generated from ShopLab OpenAPI contracts.",
   "main": "dist/index.js",
   "module": "dist/index.js",

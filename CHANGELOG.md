@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://github.com/leandroAmariles/shoplab-contracts/compare/v1.4.0...v1.5.0) (2026-11-26)
+
+
+### Features
+
+* **openapi:** [LAB-113] add the catalog API contract ([#19](https://github.com/leandroAmariles/shoplab-contracts/issues/19)) ([4533947](https://github.com/leandroAmariles/shoplab-contracts/commit/45339477c93e64394c8c02a58ccaea20abaac3f2))
+
 ## [1.4.0](https://github.com/leandroAmariles/shoplab-contracts/compare/v1.3.0...v1.4.0) (2026-11-26)
 
 

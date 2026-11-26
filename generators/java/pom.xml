@@ -120,6 +120,35 @@
                         </configuration>
                     </execution>
                     <execution>
+                        <!-- HTTP interface of the active assistant settings that eval consumes (LAB-59). It reuses
+                             the models above and brings no HTTP client or Jackson of its own: the consumer provides
+                             spring-web. -->
+                        <id>generate-chat-client</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>../../openapi/chat/v1/chat-api.yaml</inputSpec>
+                            <generatorName>spring</generatorName>
+                            <library>spring-http-interface</library>
+                            <generateModels>false</generateModels>
+                            <generateSupportingFiles>false</generateSupportingFiles>
+                            <generateApiTests>false</generateApiTests>
+                            <generateApiDocumentation>false</generateApiDocumentation>
+                            <apisToGenerate>AssistantSettings</apisToGenerate>
+                            <apiPackage>com.shoplab.contracts.chat.client</apiPackage>
+                            <modelPackage>com.shoplab.contracts.chat.model</modelPackage>
+                            <configOptions>
+                                <reactive>true</reactive>
+                                <useTags>true</useTags>
+                                <useSpringBoot3>true</useSpringBoot3>
+                                <useJakartaEe>true</useJakartaEe>
+                                <openApiNullable>false</openApiNullable>
+                                <hideGenerationTimestamp>true</hideGenerationTimestamp>
+                            </configOptions>
+                        </configuration>
+                    </execution>
+                    <execution>
                         <id>generate-retrieval-dto</id>
                         <goals>
                             <goal>generate</goal>
